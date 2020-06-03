@@ -38,14 +38,38 @@ var yavg = 0;
 var textshows = false;
 var framesSinceFade = 0;
 let numfadeinframes = 20;
+var framesSinceCStart = 0;
+var cstart = false;
+var cfin = false;
+
+function getR(n, nframes, maxR){
+	// return map(sv, 0, nframes, 0, maxR)
+	var nadj = map(n, 0, nframes, 0, 1)
+	var sv = sin((nadj * PI) / 2);
+	return map(sv, 0, 1, 0, maxR)
+}
 
 function draw() {
 	// console.log('loop'+frameCount);
 	//frameRate(1);
-
 	imageMode(CENTER);
   // put drawing code here
 	background(255);
+
+	if (cstart){
+		var nframes = 30
+		var smallestDimension = h;
+		if (w < h) smallestDimension = w;
+		var maxR = map(current, 0, goal, 0, smallestDimension)
+		var r = getR(framesSinceCStart, nframes, maxR)
+		fill(189,222,191)
+		noStroke();
+		circle(w/2, h/2, r*2)
+		framesSinceCStart++;
+		if (framesSinceCStart > nframes){
+			noLoop();
+		}
+	}
 
 	textSize(15);
 	var op = map(frameCount - 20, 0, numfadeinframes, 255, 0)
@@ -59,7 +83,7 @@ function draw() {
 
 	var ypositions = [];
 	if (textshows){
-		fill(255)
+		noFill();
 		stroke(200);
 		var rectwidth = w/2;
 		var progresswidth = map(current, 0, goal, 0, rectwidth)
@@ -97,12 +121,16 @@ function draw() {
 		fill(255);
 		noStroke();
 		rect(0,h-5,w,5);
-		noLoop();
+		cstart = true;
+		// noLoop();
 	}
 	yavg = arravg(ypositions);
 	if (yavg > h/2){
 		textshows = true;
 	}
+
+
+
 }
 
 function mousePressed(){
