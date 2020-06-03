@@ -4,9 +4,11 @@ var h = window.innerHeight,
 var bagelHeight = 150;
 var c = h/2 + w/12 + 25 + 30;
 
+var blmimg;
 
 var images = []
 function preload(){
+	blmimg = loadImage('bpxblm.png');
 	for (i = 0; i < 9; i++){
 		images.push(loadImage('images/'+i+'.png'));
 	}
@@ -15,7 +17,7 @@ function preload(){
 	}
 }
 
-var goal = 700;
+var goal = 800;
 var current = 20;
 
 var bagels = []
@@ -102,12 +104,15 @@ function draw() {
 	textSize(15);
 	var op = map(frameCount - 20, 0, numfadeinframes, 255, 0)
 	fill(op)
-	textStyle(BOLD)
-	textAlign(CENTER, CENTER);
-
-	text('brought to you by bagel party', w/2, 20)
-	textSize(30)
-	text('for #BLM', w/2, 20+40)
+	// textStyle(BOLD)
+	// textAlign(CENTER, CENTER);
+	//
+	// text('brought to you by bagel party', w/2, 20)
+	// textSize(30)
+	// text('for #BLM', w/2, 20+40)
+	imageMode(CORNERS)
+	image(blmimg, 0, 0, width, width*blmimg.height/blmimg.width)
+	imageMode(CORNER)
 
 	var ypositions = [];
 	if (textshows){
