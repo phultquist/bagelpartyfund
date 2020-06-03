@@ -83,7 +83,7 @@ function draw() {
 		}
 		fill(189,222,191)
 		noStroke();
-		circle(w/2, h/2, r*2)
+		circle(w/2, h/2, r)
 		framesSinceCStart++;
 		if (framesSinceCStart > nframes){
 			cstart = false;
