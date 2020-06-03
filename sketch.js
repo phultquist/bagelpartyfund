@@ -61,11 +61,12 @@ function getR(n, nframes, maxR){
 }
 
 function draw() {
-	// console.log('loop'+frameCount);
-	//frameRate(1);
+	background(255);
+
+	imageMode(CORNERS)
+	image(blmimg, 0, 0, width, width*blmimg.height/blmimg.width)
 	imageMode(CENTER);
   // put drawing code here
-	background(255);
 
 	if (cstart){
 		var nframes = 30
@@ -102,17 +103,12 @@ function draw() {
 
 
 	textSize(15);
-	var op = map(frameCount - 20, 0, numfadeinframes, 255, 0)
-	fill(op)
 	// textStyle(BOLD)
 	// textAlign(CENTER, CENTER);
 	//
 	// text('brought to you by bagel party', w/2, 20)
 	// textSize(30)
 	// text('for #BLM', w/2, 20+40)
-	imageMode(CORNERS)
-	image(blmimg, 0, 0, width, width*blmimg.height/blmimg.width)
-	imageMode(CORNER)
 
 	var ypositions = [];
 	if (textshows){
