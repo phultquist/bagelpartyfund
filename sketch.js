@@ -38,7 +38,7 @@ function setup() {
 	}
 	exBagel = {
 		image: images[int(random(0, 9))],
-		x: random(0, w),
+		x: random(bagelHeight/2, w-bagelHeight/2),
 		y: bagelHeight/2 + 1,
 		vx: random(0.5,1.5),
 		vy: random(0.5,1.5)
@@ -64,6 +64,10 @@ function draw() {
 	background(255);
 
 	imageMode(CORNERS)
+	if (width > 1000){
+		var imgw = 1000;
+		image(blmimg, )
+	}
 	image(blmimg, 0, 0, width, width*blmimg.height/blmimg.width)
 	imageMode(CENTER);
   // put drawing code here
@@ -87,7 +91,12 @@ function draw() {
 		}
 	}
 
-	tint(255, 100)
+	var nframestill100 = 20;
+	var opacity = map(frameCount, 0, nframestill100, 0, 100);
+	if (nframestill100 < frameCount){
+		opacity = 100
+	}
+	tint(255, opacity)
 	image(exBagel.image, exBagel.x, exBagel.y, bagelHeight, bagelHeight);
 	exBagel.x += exBagel.vx;
 	exBagel.y += exBagel.vy;
@@ -116,10 +125,10 @@ function draw() {
 		stroke(200);
 		var rectwidth = w/2;
 		var progresswidth = map(current, 0, goal, 0, rectwidth)
-		rect(w/4, h/2 - w/12 - 20, rectwidth, 10)
+		rect(w/4, h/2 + w/12 + 75, rectwidth, 10)
 		noStroke();
 		fill(0,0,0)
-		rect(w/4, h/2 - w/12 - 20, progresswidth, 10);
+		rect(w/4, h/2 + w/12 + 75, progresswidth, 10);
 
 		fill(map(framesSinceFade, 0, 10, 255, 0));
 		textStyle(BOLD)
