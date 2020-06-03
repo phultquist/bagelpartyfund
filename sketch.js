@@ -156,9 +156,10 @@ function draw() {
 	if (yavg > h/2){
 		textshows = true;
 	}
+}
 
-
-
+function touchStarted(){
+	mousePressed();
 }
 
 function mousePressed(){
