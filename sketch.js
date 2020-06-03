@@ -20,6 +20,8 @@ var current = 20;
 
 var bagels = []
 
+var exBagel;
+
 function setup() {
 	createCanvas(w,h);
 	for (i = 0; i < 150; i++){
@@ -31,6 +33,13 @@ function setup() {
 			xspeed: random(-.5,.5),
 			rotate: random(-.1,.1)
 		})
+	}
+	exBagel = {
+		image: images[int(random(0, 9))],
+		x: random(0, w),
+		y: bagelHeight/2 + 1,
+		vx: random(0.5,1.5),
+		vy: random(0.5,1.5)
 	}
 }
 
@@ -62,14 +71,33 @@ function draw() {
 		if (w < h) smallestDimension = w;
 		var maxR = map(current, 0, goal, 0, smallestDimension)
 		var r = getR(framesSinceCStart, nframes, maxR)
+		if (cfin){
+			r = maxR
+		}
 		fill(189,222,191)
 		noStroke();
 		circle(w/2, h/2, r*2)
 		framesSinceCStart++;
 		if (framesSinceCStart > nframes){
-			noLoop();
+			cstart = false;
+			cfin = true;
 		}
 	}
+
+	tint(255, 100)
+	image(exBagel.image, exBagel.x, exBagel.y, bagelHeight, bagelHeight);
+	exBagel.x += exBagel.vx;
+	exBagel.y += exBagel.vy;
+	if (exBagel.x + bagelHeight/2 > w || exBagel.x - bagelHeight/2 < 0){
+		exBagel.vx *= -1;
+	}
+	if (exBagel.y + bagelHeight/2 > h || exBagel.y - bagelHeight/2 < 0){
+		exBagel.vy *= -1;
+	}
+	noTint();
+
+
+
 
 	textSize(15);
 	var op = map(frameCount - 20, 0, numfadeinframes, 255, 0)
@@ -120,7 +148,7 @@ function draw() {
 		bagels = [];
 		fill(255);
 		noStroke();
-		rect(0,h-5,w,5);
+		rect(0,h-1,w,1);
 		cstart = true;
 		// noLoop();
 	}
