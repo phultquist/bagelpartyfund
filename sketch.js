@@ -17,7 +17,7 @@ function preload(){
 	}
 }
 
-var goal = 600;
+var goal = 700;
 var current = 660;
 
 var bagels = []
